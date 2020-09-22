@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  labels:
+    app: k8s-for-rails
+    tier: redis
+spec:
+  selector:
+    app: k8s-for-rails
+    tier: redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379

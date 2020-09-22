@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+  labels:
+    app: k8s-for-rails
+    tier: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-for-rails
+      tier: web
+  template:
+    metadata:
+      labels:
+        app: k8s-for-rails
+        tier: web
+    spec:
+      containers:
+        - name: web
+          image: namtx/k8s-for-rails
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: web-config-map
+            - secretRef:
+                name: web-secret
